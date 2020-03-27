@@ -1,26 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+// JSX (JavaScript XML)
+
+import'./global.css'
+
+import Routes from './routes'
 
 function App() {
+  //use State nos retorna um array de 2 pocições 1° [Valor original], 2° [Função de atualização]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello OmniStack
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <Routes />
+    );
+  
 }
 
 export default App;
