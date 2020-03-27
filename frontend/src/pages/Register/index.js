@@ -3,30 +3,47 @@ import "./styles.css";
 
 import api from "../../services/api";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
 import logoImg from "../../assets/logo.svg";
 
 export default function Register() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    number: "",
-    city: "",
-    state: ""
-  });
+    const history= useHistory()
 
-  function handleRegister(e) {
-    e.preventDefault();
-    console.log(form);
-  }
 
-  function handleChangeForm({ target }) {
-    const newForm = { ...form };
-    newForm[target.name] = target.value;
-    setForm(newForm);
-  }
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [whatsapp, setWhatsapp] = useState('')
+  const [city, setCity] = useState('')
+  const [uf, setUf] = useState('')
+
+ async function handleRegister(e) {
+      e.preventDefault();
+
+
+        const data = {
+        name, 
+        whatsapp,
+        email,
+        city,
+        uf
+         }
+         try{
+            const response = await api.post('ongs', data)
+            alert(`Seu ID é ${response.data.id}`)
+
+
+            history.push('/')
+            
+         } catch(err){
+             alert('Erro no cadastro, tente novamente')
+         }
+        
+         
+     }
+
+
 
   return (
     <div className="register-container">
@@ -45,34 +62,35 @@ export default function Register() {
         </section>
         <form onSubmit={handleRegister}>
           <input
-            name="name"
             placeholder="Nome da ONG"
-            onChange={handleChangeForm}
+            value={name}
+            onChange={e => setName(e.target.value)}
           />
           <input
             type="email"
-            name="email"
+            value={email}
             placeholder="E-mail"
-            onChange={handleChangeForm}
+            onChange={e => setEmail(e.target.value)}
           />
           <input
-            name="number"
+            value={whatsapp}
             placeholder="Whatsapp"
-            onChange={handleChangeForm}
+            onChange={e => setWhatsapp(e.target.value)}
           />
 
           <div className="input-group">
             <input
-              name="city"
+              value={city}
               placeholder="Cidade"
-              onChange={handleChangeForm}
+              onChange={e => setCity(e.target.value)}
             />
 
             <input
-              name="state"
+              name="Uf"
+              value={uf}
               placeholder="UF"
               style={{ width: 80 }}
-              onChange={handleChangeForm}
+              onChange={e => setUf(e.target.value)}
             />
           </div>
           <button className="button" type="submit">
