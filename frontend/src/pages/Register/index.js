@@ -9,14 +9,15 @@ import { FiArrowLeft } from "react-icons/fi";
 import logoImg from "../../assets/logo.svg";
 
 export default function Register() {
-    const history= useHistory()
-
-
+  
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [whatsapp, setWhatsapp] = useState('')
   const [city, setCity] = useState('')
   const [uf, setUf] = useState('')
+
+
+  const history = useHistory()
 
  async function handleRegister(e) {
       e.preventDefault();
@@ -30,7 +31,7 @@ export default function Register() {
         uf
          }
          try{
-            const response = await api.post('ongs', data)
+            const response = await api.post('http://localhost:3333/ongs', data)
             alert(`Seu ID é ${response.data.id}`)
 
 
